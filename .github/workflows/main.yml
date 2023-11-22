@@ -4,7 +4,7 @@ on:
       - main
   pull_request:
     branches:
-     - main
+      - main
 
 jobs:
   notify:
@@ -12,10 +12,3 @@ jobs:
     steps:
       - name: Get commit author
         run: echo "AUTHOR=$(git log -1 --pretty=format:'%an')" >> $GITHUB_ENV
-
-      - name: Notification Discord
-      env: 
-        DISCORD_WEBHOOK: ${{secrets.DISCORD_WEBHOOK}}
-        AUTHOR: ${{ env.AUTHOR }}
-      run: |
-      curl -H "Content-Type: application/json" -X POST -d '{"content": "Push effectué par : '"$AUTHOR"'"}' $DISCORD_WEBHOOK  
