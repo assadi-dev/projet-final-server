@@ -17,4 +17,5 @@ jobs:
         env: 
           DISCORD_WEBHOOK: ${{secrets.DISCORD_WEBHOOK}}
           AUTHOR: ${{ env.AUTHOR }}
-        run: 'curl -H "Content-Type: application/json" -X POST -d {"content": "Push effectué par : "$AUTHOR"}' $DISCORD_WEBHOOK  
+        run: |
+        curl -H "Content-Type: application/json" -X POST -d '{"content": "Push effectué par : }' $DISCORD_WEBHOOK  
