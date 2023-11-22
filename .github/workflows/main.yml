@@ -5,3 +5,11 @@ on:
   pull_request:
     branches:
      - main
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+   - name: Notification Discord
+   env: 
+   DISCORD_WEBHOOK: ${{secrets.DISCORD_WEBHOOK}}
