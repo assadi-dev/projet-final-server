@@ -16,7 +16,7 @@ class CreatePropositionsTable extends Migration
         Schema::create('propositions', function (Blueprint $table) {
             $table->id();
             $table->string("proposition");
-            $table->foreignId("id_question-t");
+            $table->foreignId("id_question");
             $table->timestamps();
         });
     }
