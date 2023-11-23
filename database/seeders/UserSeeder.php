@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
         $userAccount = [
 
             [
-                "name" => $faker->firstName(),
+                "name" => $faker->firstName() + "dd",
                 "email" => "admin@bigscreen.com",
                 "password" => "password"
             ]
