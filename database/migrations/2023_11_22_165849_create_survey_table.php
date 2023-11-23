@@ -13,7 +13,7 @@ class CreateSurveyTable extends Migration
      */
     public function up()
     {
-        Schema::create('survey', function (Blueprint $table) {
+        Schema::create('surveys', function (Blueprint $table) {
             $table->id();
             $table->string("title", 50);
             $table->string("description")->nullable();
