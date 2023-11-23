@@ -13,7 +13,7 @@ class CreateParticipantTable extends Migration
      */
     public function up()
     {
-        Schema::create('participant', function (Blueprint $table) {
+        Schema::create('participants', function (Blueprint $table) {
             $table->id();
             $table->string("email");
             $table->string("token");

@@ -17,7 +17,8 @@ class CreateAnswersTable extends Migration
             $table->id();
             $table->string("value");
             $table->foreignId("id_question");
-            $table->foreignId("id_participant");
+            $table->unsignedBigInteger("id_survey");
+            $table->string("email");
             $table->timestamps();
         });
     }
