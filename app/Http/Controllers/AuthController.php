@@ -102,6 +102,10 @@ class AuthController extends Controller
     }
 
 
+    /**
+     * Recuperation de données de l'utilisateur connecté
+     * @return User
+     */
     public function me(Request $request)
     {
         return $request->user();
