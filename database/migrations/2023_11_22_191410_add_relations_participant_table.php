@@ -14,7 +14,7 @@ class AddRelationsParticipantTable extends Migration
     public function up()
     {
         Schema::table('participants', function (Blueprint $table) {
-            $table->foreignId("id_survey")->change()->foreignId("id_survey_participant")->constrained("survey");
+            $table->foreignId("id_survey")->change()->foreignId("id_survey_participant")->constrained("surveys");
             $table->dropColumn("id");
             $table->primary(["id_survey","email"], "pk_participant");
 
