@@ -15,6 +15,8 @@ class AddRelationsQuestionsTable extends Migration
     {
         Schema::table('questions', function (Blueprint $table) {
             $table->foreignId("survey_id")->change()->foreign("survey_id")->references('id')->on("surveys");
+            $table->boolean('required');
+            $table->boolean('is_email')->nullable();
         });
     }
 

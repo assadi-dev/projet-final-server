@@ -26,6 +26,8 @@ class QuestionSeeder extends Seeder
                 'question_number' => $key+1,
                 'question_body' => $question->body,
                 'question_type' => $question->type,
+                'required' => $question->required,
+                'is_email' => isset($question->is_email)? $question->is_email : false
             ]);
             if (isset($question->propositions)) {
                 // création des propositions s'il en existe pour chaque question
