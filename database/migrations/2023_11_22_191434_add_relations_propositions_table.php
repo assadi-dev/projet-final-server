@@ -14,7 +14,7 @@ class AddRelationsPropositionsTable extends Migration
     public function up()
     {
         Schema::table('propositions', function (Blueprint $table) {
-            $table->foreignId("id_question")->change()->foreignId("id_question")->constrained("questions");
+            $table->foreignId("question_id")->change()->foreign("question_id")->references("id")->on("questions");
         });
     }
 

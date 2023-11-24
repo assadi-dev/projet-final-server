@@ -16,8 +16,8 @@ class CreateAnswersTable extends Migration
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
             $table->string("value");
-            $table->foreignId("id_question");
-            $table->unsignedBigInteger("id_survey");
+            $table->foreignId("question_id");
+            $table->unsignedBigInteger("survey_id");
             $table->string("email");
             $table->timestamps();
         });

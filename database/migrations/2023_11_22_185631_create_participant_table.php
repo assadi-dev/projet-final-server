@@ -17,7 +17,7 @@ class CreateParticipantTable extends Migration
             $table->id();
             $table->string("email");
             $table->string("token");
-            $table->foreignId("id_survey");
+            $table->foreignId("survey_id");
             $table->timestamps();
         });
     }
