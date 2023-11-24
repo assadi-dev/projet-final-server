@@ -18,7 +18,7 @@ class CreateQuestionTable extends Migration
             $table->integer("question_number");
             $table->string("question_body");
             $table->enum("question_type", ["A","B","C"]);
-            $table->foreignId("id_survey");
+            $table->foreignId("survey_id");
             $table->timestamps();
         });
     }

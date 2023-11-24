@@ -20,6 +20,8 @@ class Question extends Model
         'question_number',
         'question_body',
         'question_type',
+        'required',
+        'is_email',
         'id_survey'
     ];
 

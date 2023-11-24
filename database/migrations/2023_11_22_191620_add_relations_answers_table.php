@@ -14,9 +14,8 @@ class AddRelationsAnswersTable extends Migration
     public function up()
     {
         Schema::table('answers', function (Blueprint $table) {
-            $table->foreignId("id_question")->change()->foreignId("id_question")->constrained("questions");
-            $table->foreign(["id_survey","email"])->references(["id_survey","email"])->on("participants");
-
+            $table->foreignId("question_id")->change()->foreign("question_id")->references("id")->on("questions");
+            $table->foreign(["survey_id","email"])->references(["survey_id","email"])->on("participants");
         });
     }
 
