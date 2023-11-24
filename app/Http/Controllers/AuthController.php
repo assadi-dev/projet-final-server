@@ -112,5 +112,23 @@ class AuthController extends Controller
     }
 
 
+    /**
+     * Suppression du token de l'utilisateur
+     */
+    public function revokeToken(Request $request)
+    {
+        try {
+            $request->user()->currentAccessToken()->delete();
+            return response()->json([
+                'message' => "Utilisateur déconnecté"
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => $th->getMessage()
+            ], 500);
+        }
+    }
+
+
 
 }
