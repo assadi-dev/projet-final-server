@@ -34,6 +34,11 @@ class Question extends Model
         return $this->belongsTo(Survey::class);
     }
 
+    /**
+     * propositions
+     * récupère les propositions liées à une question
+     * @return HasMany
+     */
     public function propositions(): HasMany{
         return $this->hasMany(Proposition::class);
     }

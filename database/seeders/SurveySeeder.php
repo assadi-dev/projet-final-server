@@ -15,7 +15,6 @@ class SurveySeeder extends Seeder
      */
     public function run()
     {
-        $faker = new Generator();
         Survey::create([
             'title' => "Sondage Big Screen",
             'description' => "Sondage Big Screen"
