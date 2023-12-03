@@ -17,7 +17,7 @@ class Proposition extends Model
      */
     protected $fillable = [
         'proposition',
-        'id_question'
+        'question_id'
     ];
 
     /**
