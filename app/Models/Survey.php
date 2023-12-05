@@ -28,7 +28,12 @@ class Survey extends Model
     public function questions(): HasMany {
         return $this->hasMany(Question::class);
     }
-
+    
+    /**
+     * participants
+     * récupère les particiapnts de ce sondage
+     * @return HasMany
+     */
     public function participants(): HasMany {
         return $this->hasMany(Participant::class);
     }
