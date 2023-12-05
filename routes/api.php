@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\SurveyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,3 +24,10 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [AuthController::class,"login"]);
 Route::middleware('auth:sanctum')->get('/me', [AuthController::class,"me"]);
 Route::middleware('auth:sanctum')->post('/revokeToken', [AuthController::class,"revokeToken"]);
+
+Route::prefix('surveys')->middleware("auth:sanctum")->group(function(){
+    Route::get('/', [SurveyController::class, 'index'])->name('index');
+});
+Route::prefix('questions')->middleware("auth:sanctum")->group(function(){
+    Route::get('/{surveyId}', [QuestionController::class, 'index'])->name('index');
+});
