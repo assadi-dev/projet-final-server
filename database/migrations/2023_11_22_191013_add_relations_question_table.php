@@ -13,9 +13,9 @@ class AddRelationsQuestionTable extends Migration
      */
     public function up()
     {
-        /* Schema::table('questions', function (Blueprint $table) {
+        Schema::table('questions', function (Blueprint $table) {
             $table->foreignId("id_survey")->constrained("survey");
-        }); */
+        });
     }
 
     /**
