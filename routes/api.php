@@ -31,3 +31,6 @@ Route::prefix('surveys')->middleware("auth:sanctum")->group(function(){
 Route::prefix('questions')->middleware("auth:sanctum")->group(function(){
     Route::get('/{surveyId}', [QuestionController::class, 'index'])->name('index');
 });
+Route::prefix('client')->group(function(){
+    Route::get('/questions/{surveyId}', [QuestionController::class, 'index']);
+});
