@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,25 +17,12 @@ class AuthController extends Controller
     * @param Request $request
     *
     */
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
         try {
             //Validation des donées entrantes
-            $validateUser = Validator::make(
-                $request->all(),
-                [
-                'name' => 'required',
-                'email' => 'required|email|unique:users,email',
-                'password' => 'required'
-                ]
-            );
+            $request->validated();
 
-            if($validateUser->fails()) {
-                return response()->json([
-                    'message' => "Erreur validation",
-                    'details' => $validateUser->errors()
-                ], 401);
-            }
 
             $user = User::create([
                 'name' => $request->name,
@@ -59,24 +48,11 @@ class AuthController extends Controller
      * @param Request $request
      *
      */
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
         try {
             //Validation des données entrantes de l'utilisateurs
-            $validateUser = Validator::make(
-                $request->all(),
-                [
-                'email' => 'required|email',
-                'password' => 'required'
-            ]
-            );
-            //Retour des erreurs validation
-            if($validateUser->fails()) {
-                return response()->json([
-                    'message' => "Erreur validation",
-                     'details' => $validateUser->errors()
-                ], 401);
-            }
+            $request->validated();
 
             //Retour en cas d'un compte utilisateur introuvable dans la base de donées
             if(!Auth::attempt($request->only(['email', 'password']))) {
