@@ -29,11 +29,20 @@ class AnswerContoller extends Controller
     {
         try {
             $validatedData = $request->validated();
+            $answer = Answer::create([
+                "value" => $validatedData["value"],
+                "email" => $validatedData["email"],
+                "survey_id" => $validatedData["survey_id"],
+                "question_id" => $validatedData["question_id"],
+            ]);
 
-            dd($validatedData);
+
+            return  $answer ;
 
         } catch (\Throwable $th) {
-            //throw $th;
+            return response()->json([
+                'message' => $th->getMessage()
+            ], 500);
         }
     }
 

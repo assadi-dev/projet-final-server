@@ -29,6 +29,8 @@ class AnswerRequest extends FormRequest
         return [
             'email' => 'required|email',
             'value' => 'required',
+            'survey_id' => 'required',
+            'question_id' => 'required'
         ];
 
 
@@ -47,7 +49,9 @@ class AnswerRequest extends FormRequest
         return [
             'email.required' => 'Adresse email requis',
             'email.email' => 'Email non valide',
-            'value.required' => 'ce champs est requis'
+            'value.required' => 'ce champs est requis',
+            'survey_id.required' => 'ce champs est requis',
+            'question_id.required' => 'ce champs est requis',
         ];
 
     }
