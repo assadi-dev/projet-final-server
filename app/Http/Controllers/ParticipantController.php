@@ -6,6 +6,7 @@ use App\Http\Requests\ParticipantRequest;
 use App\Http\Resources\ParticipantRessource;
 use App\Models\Participant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ParticipantController extends Controller
 {
@@ -33,6 +34,15 @@ class ParticipantController extends Controller
             //Validation des données entrantes de l'utilisateurs
             $request->validated();
 
+
+            $participant = Participant::create(
+                [
+                "email" => $request->email,
+                "token" => base64_encode($request->email),
+                "survey_id" => $request->survey_id
+            ]
+            );
+            return $participant;
 
         } catch (\Throwable $th) {
             return response()->json([
