@@ -28,12 +28,12 @@ class AnswerContoller extends Controller
     public function store(AnswerRequest $request)
     {
         try {
-            $validatedData = $request->validated();
+            $request->validated();
             $answer = Answer::create([
-                "value" => $validatedData["value"],
-                "email" => $validatedData["email"],
-                "survey_id" => $validatedData["survey_id"],
-                "question_id" => $validatedData["question_id"],
+                "value" => $request->value,
+                "email" => $request->email,
+                "survey_id" => $request->survey_id,
+                "question_id" => $request->question_id,
             ]);
 
 

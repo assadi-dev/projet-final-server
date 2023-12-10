@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AnswerContoller;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\SurveyController;
 use Illuminate\Http\Request;
@@ -40,4 +41,8 @@ Route::prefix('answers')->group(function () {
     Route::middleware('auth:sanctum')->get('/', [AnswerContoller::class, 'index']);
     Route::post('/', [AnswerContoller::class, 'store']);
     //Route::middleware('auth:sanctum')->get('/{answerId}', [AnswerContoller::class, 'index']);
+});
+Route::prefix('participants')->group(function () {
+    Route::middleware('auth:sanctum')->get('/', [ParticipantController::class, 'index']);
+    Route::middleware('auth:sanctum')->post('/', [ParticipantController::class, 'store']);
 });
