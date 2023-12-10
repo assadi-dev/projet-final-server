@@ -11,16 +11,7 @@ class Participant extends Model
 {
     use HasFactory;
 
-    /**
-     * primaryKey
-     * la clé composite de participant formé par
-     * l'id du sondage et email
-     * @var array
-     */
-    protected $primaryKey = [
-        'survey_id',
-        'email'
-    ];
+
 
     /**
      * fillable
@@ -38,11 +29,13 @@ class Participant extends Model
      * récupère le sondage de ce participant
      * @return BelongsTo
      */
-    public function survey(): BelongsTo {
+    public function survey(): BelongsTo
+    {
         return $this->belongsTo(Survey::class);
     }
 
-    public function answers(): HasMany {
+    public function answers(): HasMany
+    {
         return $this->hasMany(Answer::class);
     }
 }
