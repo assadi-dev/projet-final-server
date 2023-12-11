@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Answer;
+use App\Models\Participant;
+use Illuminate\Http\Request;
 use App\Http\Requests\AnswerRequest;
 use App\Http\Resources\AnswerRessource;
-use App\Models\Answer;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreAnswerForParticipant;
 
 class AnswerContoller extends Controller
 {
@@ -45,6 +47,56 @@ class AnswerContoller extends Controller
             ], 500);
         }
     }
+
+
+    /**
+     * Enregistrements des réponses envoyé par l'utilisateur
+     */
+    public function storeForParticipant(StoreAnswerForParticipant $request)
+    {
+        try {
+
+
+            $request->validated();
+
+            $survey_id =   $request->survey_id;
+            $email = $request->email;
+            $answers = $request->answers;
+
+            //creation de l'entité participant
+            $participant = Participant::create(
+                [
+                "email" => $email,
+                "token" => base64_encode($email),
+                "survey_id" => $survey_id
+                ]
+            );
+
+
+            //Sauvegardes des reponses
+            foreach($answers as $answer) {
+                $answer = Answer::create([
+                    "value" => $answer["value"],
+                    "email" => $email,
+                    "survey_id" => $survey_id,
+                    "question_id" => $answer["question_id"],
+                ]);
+            };
+
+            return response()->json([
+                'message' => "Sondage enrgistré",
+
+            ], 201);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => $th->getMessage()
+            ], 500);
+        }
+
+
+    }
+
 
     /**
      * Update the specified resource in storage.
