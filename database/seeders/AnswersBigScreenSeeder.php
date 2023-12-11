@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Faker\Factory;
 use App\Models\Participant;
+use App\Models\Question;
 use App\Models\Survey;
 use Illuminate\Database\Seeder;
 
@@ -45,12 +46,13 @@ class AnswersBigScreenSeeder extends Seeder
 
         $cb =  function ($v) {
             $title =  $v->body;
+            $question = Question::findbyQuestionBody($title);
             $propositions = null;
             if(isset($v->propositions)) {
                 $propositions = $v->propositions;
             }
 
-            return ["question_id" => "","title" => $title,  "type" => $v->type,"propositions" => $propositions];
+            return ["question_id" =>  $question->id,"title" => $title,  "type" => $v->type,"propositions" => $propositions];
         };
 
         return array_map($cb, $questions);
