@@ -29,11 +29,11 @@ class AnswersBigScreenSeeder extends Seeder
         }
 
 
-
-
     }
 
-
+    /**
+     * Generation d'un participant avec ses reponses
+     */
     private function generate_participant()
     {
 
