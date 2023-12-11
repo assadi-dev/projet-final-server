@@ -21,6 +21,8 @@ class QuestionResource extends JsonResource
             'question_type' => $this->resource->question_type,
             'required' => $this->resource->required,
             'is_email' => $this->resource->is_email,
+            'min_val' => $this->resource->min_val,
+            'max_val' => $this->resource->max_val,
 
             'propositions' => PropositionResource::collection($this->resource->propositions),
             //'survey' => new SurveyResource($this->resource->survey),
