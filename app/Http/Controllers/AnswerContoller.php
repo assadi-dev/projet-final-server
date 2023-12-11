@@ -63,28 +63,10 @@ class AnswerContoller extends Controller
             $email = $request->email;
             $answers = $request->answers;
 
-            //creation de l'entité participant
-            $participant = Participant::create(
-                [
-                "email" => $email,
-                "token" => base64_encode($email),
-                "survey_id" => $survey_id
-                ]
-            );
-
-
-            //Sauvegardes des reponses
-            foreach($answers as $answer) {
-                $answer = Answer::create([
-                    "value" => $answer["value"],
-                    "email" => $email,
-                    "survey_id" => $survey_id,
-                    "question_id" => $answer["question_id"],
-                ]);
-            };
-
+            $answersSaved = Participant::save_answers($email, $survey_id, $answers);
             return response()->json([
                 'message' => "Sondage enrgistré",
+                "data" => $answersSaved
 
             ], 201);
 
