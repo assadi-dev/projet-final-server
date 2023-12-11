@@ -24,7 +24,9 @@ class Question extends Model
         'question_type',
         'required',
         'is_email',
-        'survey_id'
+        'survey_id',
+        'min_val',
+        'max_val'
     ];
 
     /**

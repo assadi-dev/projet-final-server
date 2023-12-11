@@ -17,6 +17,8 @@ class AddRelationsQuestionsTable extends Migration
             $table->foreignId("survey_id")->change()->foreign("survey_id")->references('id')->on("surveys");
             $table->boolean('required');
             $table->boolean('is_email')->nullable();
+            $table->integer('min_val')->nullable();
+            $table->integer('max_val')->nullable();
         });
     }
 
