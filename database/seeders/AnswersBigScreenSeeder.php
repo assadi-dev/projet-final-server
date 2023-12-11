@@ -17,6 +17,9 @@ class AnswersBigScreenSeeder extends Seeder
     public function run()
     {
         //$answersSaved = Participant::save_answers($email, $survey_id, $answers);
+        dd($this->bigScreenQuestion());
+
+
     }
 
 
@@ -41,14 +44,14 @@ class AnswersBigScreenSeeder extends Seeder
         $questions = json_decode(file_get_contents($file));
 
         $cb =  function ($v) {
-            $title =  $v["body"];
-            $propositions = $v["proposition"];
-            if(!isset($propositions)) {
-                $propositions = null;
+            $title =  $v->body;
+            $propositions = null;
+            if(isset($v->propositions)) {
+                $propositions = $v->propositions;
             }
 
-            return ["question_id" => "","type" => $v["type"],"proposition" => $propositions];
-        } ;
+            return ["question_id" => "","title" => $title,  "type" => $v->type,"propositions" => $propositions];
+        };
 
         return array_map($cb, $questions);
 
