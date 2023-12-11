@@ -24,10 +24,12 @@ class AnswersBigScreenSeeder extends Seeder
      */
     public function run()
     {
-        //$answersSaved = Participant::save_answers($email, $survey_id, $answers);
-        // dd($this->faker->email());
+        for($i = 0;$i < 35;$i++) {
+            $this->generate_participant();
+        }
 
-        dd($this->generate_answers($this->faker->email(), null));
+
+
 
     }
 
@@ -38,11 +40,13 @@ class AnswersBigScreenSeeder extends Seeder
 
         $email = $this->faker->email();
         $survey_id = Survey::findByTitle("Sondage Big Screen")->id;
-
+        $answers = $this->generate_answers($email);
+        $answersSaved = Participant::save_answers($email, $survey_id, $answers);
+        return   $answersSaved;
 
     }
 
-    private function generate_answers($email, $survey_id)
+    private function generate_answers($email)
     {
 
         $bigScreenQuestions = $this->bigScreenQuestion();
@@ -87,6 +91,9 @@ class AnswersBigScreenSeeder extends Seeder
 
     }
 
+    /**
+     * Générateur de reponse aleatoire en fonction du type de question
+    */
     private function generate_answer_by_type($type, $propositions)
     {
 
