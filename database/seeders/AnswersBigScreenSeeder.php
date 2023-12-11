@@ -14,7 +14,7 @@ class AnswersBigScreenSeeder extends Seeder
 
     public function __construct()
     {
-        $this->faker = Factory::create();
+        $this->faker = Factory::create("fr_FR");
     }
 
     /**
@@ -46,6 +46,9 @@ class AnswersBigScreenSeeder extends Seeder
 
     }
 
+    /**
+     * Génére un tableau d'objet contenant l'id de la question et sa reponse
+     */
     private function generate_answers($email)
     {
 
@@ -93,6 +96,8 @@ class AnswersBigScreenSeeder extends Seeder
 
     /**
      * Générateur de reponse aleatoire en fonction du type de question
+     * si type A selectionne un element aleatoire dans les propositions
+     * si type B une phrase avec 5 mots aleatoir
     */
     private function generate_answer_by_type($type, $propositions)
     {
@@ -101,7 +106,7 @@ class AnswersBigScreenSeeder extends Seeder
             case 'A':
                 return $this->faker->randomElement($propositions);
             case 'B':
-                return $this->faker->words(5, true);
+                return $this->faker->realText()
                 ;
             case 'C':
                 return $this->faker->numberBetween(1, 5);
