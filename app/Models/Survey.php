@@ -45,7 +45,7 @@ class Survey extends Model
      * Retourne le sondage par rapport à son titre
      *
      */
-    public function findByTitle(string $title)
+    public static function findByTitle(string $title)
     {
         $results = DB::table("surveys")
         ->selectRaw("*")
