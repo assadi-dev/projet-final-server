@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Question extends Model
 {
@@ -31,7 +32,8 @@ class Question extends Model
      * Récupère l'objet sondage lié à une question
      * @return BelongsTo
      */
-    public function survey(): BelongsTo{
+    public function survey(): BelongsTo
+    {
         return $this->belongsTo(Survey::class);
     }
 
@@ -40,7 +42,8 @@ class Question extends Model
      * récupère les propositions liées à une question
      * @return HasMany
      */
-    public function propositions(): HasMany{
+    public function propositions(): HasMany
+    {
         return $this->hasMany(Proposition::class);
     }
 
@@ -49,7 +52,8 @@ class Question extends Model
      * récupère toutes les réponses liées à cette question
      * @return HasMany
      */
-    public function answers(): HasMany{
+    public function answers(): HasMany
+    {
         return $this->hasMany(Answer::class);
     }
 
@@ -59,9 +63,26 @@ class Question extends Model
      * @param  mixed $param
      * @return HasOne
      */
-    public function answer(Participant $param): HasOne{
+    public function answer(Participant $param): HasOne
+    {
         return $this->hasOne(Answer::where('survey_id', $param->survey_id)
                                     ->where('email', $param->email)
                                     ->where('question_id', $this->id)->get());
-    } // reste à tester si valable
+    }
+
+    /**
+     * Retourne les données de question a partir du nom de la question
+     * @param string $question_body Nom de la question
+     */
+    public static function findbyQuestionBody($question_body)
+    {
+        $results = DB::table("questions")
+        ->selectRaw("*")
+        ->whereRaw('question_body = ?', $question_body)
+        ->first();
+
+        return  $results;
+    }
+
+
 }
