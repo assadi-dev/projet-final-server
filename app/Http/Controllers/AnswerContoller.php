@@ -7,7 +7,8 @@ use App\Models\Participant;
 use Illuminate\Http\Request;
 use App\Http\Requests\AnswerRequest;
 use App\Http\Resources\AnswerRessource;
-use App\Http\Requests\StoreAnswerForParticipant;
+use Database\Seeders\AnswersBigScreenSeeder;
+use App\Http\Requests\StoreAnswerForParticipantRequest;
 
 class AnswerContoller extends Controller
 {
@@ -52,10 +53,12 @@ class AnswerContoller extends Controller
     /**
      * Enregistrements des réponses envoyé par l'utilisateur
      */
-    public function storeForParticipant(StoreAnswerForParticipant $request)
+    public function storeForParticipant(StoreAnswerForParticipantRequest $request)
     {
         try {
 
+            $test = new  AnswersBigScreenSeeder();
+            $test->run();
 
             $request->validated();
 
