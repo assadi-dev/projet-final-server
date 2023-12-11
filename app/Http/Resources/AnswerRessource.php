@@ -16,9 +16,12 @@ class AnswerRessource extends JsonResource
     {
         return [
             'id' => $this->resource->id,
-            'value' => $this->resource->title,
-            "question" => $this->resource->question->title,
-            'email' => $this->ressource->emaail
+            'value' => $this->resource->value,
+            "question_body" => $this->resource->question->question_body,
+            "question_number" => $this->resource->question->question_number,
+            "question_type" => $this->resource->question->question_type,
+            "survey" => $this->resource->question->survey->title,
+            'email' => $this->resource->email
         ];
     }
 }
