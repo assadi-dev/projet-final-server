@@ -121,7 +121,8 @@ class AnswerContoller extends Controller
             $question_number =  $request->question_number;
             $question_number = $request->question_number;
             $result = Answer::getCountOfValue($survey_id, $question_number);
-            dd($result);
+
+            return $result;
 
         } catch (\Throwable $th) {
             return response()->json([
