@@ -14,6 +14,12 @@ class ParticipantRessource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            "email" => $this->resource->email,
+            "token" => $this->resource->token,
+            "survey_id" => $this->resource->survey->id,
+            "survey" => $this->resource->survey->title,
+            "created_at" => $this->resource->created_at
+        ];
     }
 }
