@@ -39,6 +39,7 @@ Route::prefix('client')->group(function () {
 });
 Route::prefix('answers')->group(function () {
     Route::middleware('auth:sanctum')->get('/', [AnswerContoller::class, 'index']);
+    Route::middleware('auth:sanctum')->get('/count/value/{survey_id}', [AnswerContoller::class, 'getCountValue']);
     //Route::post('/', [AnswerContoller::class, 'store']);
     Route::post('/', [AnswerContoller::class, 'storeForParticipant']);
     //Route::middleware('auth:sanctum')->get('/{answerId}', [AnswerContoller::class, 'index']);

@@ -102,4 +102,32 @@ class AnswerContoller extends Controller
         //
     }
 
+    /**
+     * Obtenir le nombres de repetion de la reponse
+     *  @param string $survey_id
+     * @param string $question_number
+     *
+     */
+    public function getCountValue($survey_id, Request $request)
+    {
+        try {
+
+            if(!isset($request->question_number)) {
+                throw new \Exception("Le param question_number doit etre renseigné");
+            }
+
+
+            $survey_id = 1;
+            $question_number =  $request->question_number;
+            $question_number = $request->question_number;
+            $result = Answer::getCountOfValue($survey_id, $question_number);
+            dd($result);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => $th->getMessage()
+            ], 500);
+        }
+    }
+
 }
