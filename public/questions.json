@@ -5,7 +5,7 @@
         "propositions" : ["Homme", "Femme", "Ne préfère pas répondre"]
     , "required" : true},
     {"body" : "Nombre de personnes dans votre foyer (adultes & enfants)", "type" : "C", "required" : true, "min_val": 1, "max_val": 5},
-    {"body" : "Nombre profession", "type" : "B", "required" : true},
+    {"body" : "Votre profession", "type" : "B", "required" : true},
     {"body" : "Quel marque de casque VR utilisez-vous ?", "type" : "A",
         "propositions" : ["Oculus Quest", "Oculus Rift/s", "HTC Vive", "Windows Mixed Reality", "Valve index"]
     , "required" : true},
