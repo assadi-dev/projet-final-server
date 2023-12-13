@@ -37,12 +37,13 @@ Route::prefix('questions')->middleware("auth:sanctum")->group(function () {
 Route::prefix('client')->group(function () {
     Route::get('/questions/{surveyId}', [QuestionController::class, 'index']);
     Route::get('/surveys/{surveyId}', [SurveyController::class, 'show']);
+    Route::post('/answers', [AnswerContoller::class, 'storeForParticipant']);
 });
 Route::prefix('answers')->group(function () {
     Route::middleware('auth:sanctum')->get('/', [AnswerContoller::class, 'index']);
     Route::middleware('auth:sanctum')->get('/count/value/{survey_id}', [AnswerContoller::class, 'getCountValue']);
     //Route::post('/', [AnswerContoller::class, 'store']);
-    Route::post('/', [AnswerContoller::class, 'storeForParticipant']);
+    Route::post('/', [AnswerContoller::class, 'storeForParticipant']); // à surement enlever
     //Route::middleware('auth:sanctum')->get('/{answerId}', [AnswerContoller::class, 'index']);
 });
 Route::prefix('participants')->group(function () {
