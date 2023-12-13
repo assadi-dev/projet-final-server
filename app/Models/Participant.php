@@ -68,6 +68,8 @@ class Participant extends Model
                    ]
             );
 
+
+
             //Sauvegardes des reponses
             foreach($answers as $answer) {
                 $answer = Answer::create([
@@ -77,17 +79,45 @@ class Participant extends Model
                     "question_id" => $answer["question_id"],
                 ]);
 
-                array_push($answerParticipant, $answer);
+                $cleanAnswer = [
+                    "id" => $answer->id,
+                    "value" => $answer->value,
+                    "email" => $answer->email,
+                    "survey_id" => $answer->question->survey->id,
+                    "survey" => $answer->question->survey->title,
+                    "question_id" => $answer->question->id,
+                    "question_body" => $answer->question->question_body,
+            ];
+                array_push($answerParticipant, $cleanAnswer);
 
             };
 
-            return  (object)["participants" => $participant,"answers" => $answerParticipant];
+
+
+            return  (object)["participant" => [
+                "email" => $participant->email,
+                "token" => $participant->token,
+                "survey_id" => $participant->survey->id,
+                "survey" => $participant->survey->title,
+            ],"answers" => $answerParticipant];
 
         } catch (\Throwable $th) {
             throw $th;
         }
 
 
+    }
+
+
+    public function clean_answers_object(Answer $object)
+    {
+        return  [
+            "id" => $object->id,
+            "value" => $object->id,
+            "email" => $object->id,
+            "survey" => $object->survey->title,
+            "question_id" => $object->qustion->question_body,
+    ];
     }
 
 }
