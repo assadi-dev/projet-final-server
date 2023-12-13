@@ -63,7 +63,7 @@ class Participant extends Model
             $participant = Participant::create(
                 [
                    "email" => $email,
-                   "token" => base64_encode($email),
+                   "token" => base64_encode($email) . base64_encode($survey_id),
                    "survey_id" => $survey_id
                    ]
             );
