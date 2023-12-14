@@ -11,7 +11,10 @@ class Participant extends Model
 {
     use HasFactory;
 
-
+    /* protected $primaryKey = [
+        'survey_id',
+        'email'
+    ]; */
 
     /**
      * fillable
@@ -118,6 +121,11 @@ class Participant extends Model
             "survey" => $object->survey->title,
             "question_id" => $object->qustion->question_body,
     ];
+    }
+
+    public static function findByToken($token){
+        $participant = Participant::where('token', $token)->get()->first();
+        return $participant;
     }
 
 }

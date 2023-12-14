@@ -51,7 +51,7 @@ class Question extends Model
 
     /**
      * answers
-     * récupère toutes les réponses liées à cette question
+     * récupère toutes les réponses liées à cette question peu importe le participant
      * @return HasMany
      */
     public function answers(): HasMany
@@ -69,7 +69,7 @@ class Question extends Model
     {
         return $this->hasOne(Answer::where('survey_id', $param->survey_id)
                                     ->where('email', $param->email)
-                                    ->where('question_id', $this->id)->get());
+                                    ->where('question_id', $this->id)->first());
     }
 
     /**

@@ -131,4 +131,11 @@ class AnswerContoller extends Controller
         }
     }
 
+    public function getParticipantAnswers($token){
+        $participant = Participant::findByToken($token);
+        $answers = Answer::where('email', $participant->email)
+                            ->where('survey_id', $participant->survey_id)
+                            ->get();
+        return AnswerRessource::collection($answers);
+    }
 }
