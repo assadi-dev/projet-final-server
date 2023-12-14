@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\AnswerRequest;
 use App\Http\Resources\AnswerRessource;
 use App\Http\Requests\StoreAnswerForParticipantRequest;
+use App\Http\Resources\AnswerFullResource;
 
 class AnswerContoller extends Controller
 {
@@ -131,7 +132,15 @@ class AnswerContoller extends Controller
         }
     }
 
-    public function getParticipantAnswers($token){
+    public function getParticipantAnswersClient($token){
+        $participant = Participant::findByToken($token);
+        $answers = Answer::where('email', $participant->email)
+                            ->where('survey_id', $participant->survey_id)
+                            ->get();
+        return AnswerFullResource::collection($answers);
+    }
+
+    public function getParticipantAnswersAdmin($token){
         $participant = Participant::findByToken($token);
         $answers = Answer::where('email', $participant->email)
                             ->where('survey_id', $participant->survey_id)
