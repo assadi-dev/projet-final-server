@@ -2,9 +2,10 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Answer;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ParticipantRessource extends JsonResource
+class ParticipantFullResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,11 +15,17 @@ class ParticipantRessource extends JsonResource
      */
     public function toArray($request)
     {
+
+        $answers =    $answers = Answer::where('email', $this->resource->email)
+        ->where('survey_id', $this->resource->survey->id)
+        ->get()->first();
+
         return [
             "email" => $this->resource->email,
             "token" => $this->resource->token,
             "created_at" => $this->resource->created_at,
-            "survey" => new SurveyResource($this->resource->survey)
+            "survey" => new SurveyResource($this->resource->survey),
+            "answers" => new AnswerRessource($answers)
         ];
     }
 }
