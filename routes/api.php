@@ -41,8 +41,9 @@ Route::prefix('client')->group(function () {
     Route::post('/answers', [AnswerContoller::class, 'storeForParticipant']);
     Route::get('/answers/{token}', [AnswerContoller::class, 'getParticipantAnswersClient']);
 });
-Route::prefix('admin')->middleware('auth:sanctum')->group(function(){
+Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
     Route::get('/answers/{token}', [AnswerContoller::class, 'getParticipantAnswersAdmin']);
+    Route::get('/participants', [ParticipantController::class, 'getAdminParticipant']);
 });
 Route::prefix('answers')->group(function () {
     Route::middleware('auth:sanctum')->get('/', [AnswerContoller::class, 'index']);

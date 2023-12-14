@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ParticipantRequest;
-use App\Http\Resources\ParticipantRessource;
 use App\Models\Participant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\ParticipantRequest;
+use App\Http\Resources\ParticipantRessource;
+use App\Http\Resources\ParticipantFullResource;
 
 class ParticipantController extends Controller
 {
@@ -95,4 +96,11 @@ class ParticipantController extends Controller
     {
         //
     }
+
+
+    public function getAdminParticipant()
+    {
+        return ParticipantFullResource::collection(Participant::paginate(10));
+    }
+
 }
