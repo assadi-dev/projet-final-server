@@ -38,10 +38,10 @@ Route::prefix('client')->group(function () {
     Route::get('/questions/{surveyId}', [QuestionController::class, 'index']);
     Route::get('/surveys/{surveyId}', [SurveyController::class, 'show']);
     Route::post('/answers', [AnswerContoller::class, 'storeForParticipant']);
-    Route::get('/answers/{token}', [AnswerContoller::class, 'getParticipantAnswers']);
+    Route::get('/answers/{token}', [AnswerContoller::class, 'getParticipantAnswersClient']);
 });
 Route::prefix('admin')->middleware('auth:sanctum')->group(function(){
-    Route::get('/answers/{token}', [AnswerContoller::class, 'getParticipantAnswers']);
+    Route::get('/answers/{token}', [AnswerContoller::class, 'getParticipantAnswersAdmin']);
 });
 Route::prefix('answers')->group(function () {
     Route::middleware('auth:sanctum')->get('/', [AnswerContoller::class, 'index']);
