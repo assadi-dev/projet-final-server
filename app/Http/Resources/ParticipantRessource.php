@@ -17,9 +17,9 @@ class ParticipantRessource extends JsonResource
         return [
             "email" => $this->resource->email,
             "token" => $this->resource->token,
-            "survey_id" => $this->resource->survey->id,
-            "survey" => $this->resource->survey->title,
-            "created_at" => $this->resource->created_at
+            "created_at" => $this->resource->created_at,
+
+            "survey" => new SurveyResource($this->resource->survey)
         ];
     }
 }
