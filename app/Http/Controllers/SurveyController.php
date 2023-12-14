@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\SurveyResource;
+use App\Models\Participant;
 use App\Models\Survey;
 use Illuminate\Http\Request;
 
@@ -82,5 +83,10 @@ class SurveyController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function findByTokenParticipant($token){
+        $survey = Participant::findByToken($token)->survey;
+        return new SurveyResource($survey);
     }
 }
