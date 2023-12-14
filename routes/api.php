@@ -28,16 +28,19 @@ Route::post('/register', [AuthController::class,"register"]);
 Route::middleware('auth:sanctum')->get('/me', [AuthController::class,"me"]);
 Route::middleware('auth:sanctum')->post('/revokeToken', [AuthController::class,"revokeToken"]);
 
-Route::prefix('surveys')->middleware("auth:sanctum")->group(function () {
+Route::prefix('surveys')->middleware("auth:sanctum")->group(function () { // à rapatrier dans admin
     Route::get('/', [SurveyController::class, 'index'])->name('index');
 });
-Route::prefix('questions')->middleware("auth:sanctum")->group(function () {
+Route::prefix('questions')->middleware("auth:sanctum")->group(function () { // à rapatrier dans admin
     Route::get('/{surveyId}', [QuestionController::class, 'index'])->name('index');
 });
 Route::prefix('client')->group(function () {
     Route::get('/questions/{surveyId}', [QuestionController::class, 'index']);
     Route::get('/surveys/{surveyId}', [SurveyController::class, 'show']);
     Route::post('/answers', [AnswerContoller::class, 'storeForParticipant']);
+    Route::get('/answers/{token}', [AnswerContoller::class, 'getParticipantAnswers']);
+});
+Route::prefix('admin')->middleware('auth:sanctum')->group(function(){
     Route::get('/answers/{token}', [AnswerContoller::class, 'getParticipantAnswers']);
 });
 Route::prefix('answers')->group(function () {
