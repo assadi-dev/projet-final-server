@@ -24,11 +24,9 @@ class AnswersBigScreenSeeder extends Seeder
      */
     public function run()
     {
-        for($i = 0;$i < 35;$i++) {
+        for($i = 0;$i < 35; $i++) {
             $this->generate_participant();
         }
-
-
     }
 
     /**
@@ -36,14 +34,11 @@ class AnswersBigScreenSeeder extends Seeder
      */
     private function generate_participant()
     {
-
-
         $email = $this->faker->email();
         $survey_id = Survey::findByTitle("Sondage Big Screen")->id;
         $answers = $this->generate_answers($email);
         $answersSaved = Participant::save_answers($email, $survey_id, $answers);
         return   $answersSaved;
-
     }
 
     /**
@@ -51,19 +46,18 @@ class AnswersBigScreenSeeder extends Seeder
      */
     private function generate_answers($email)
     {
-
         $bigScreenQuestions = $this->bigScreenQuestion();
 
         $cb = function ($questionItem) use ($email) {
             $type = $questionItem["type"];
             $propositions = $questionItem["propositions"];
-            if($questionItem["body"] == "votre adresse email") {
+            if($questionItem["body"] == "Votre adresse email") {
                 $value = $email;
             } else {
                 $value = $this->generate_answer_by_type($type, $propositions);
             }
 
-            return ["question_id" => $questionItem["question_id"],"value" => $value ];
+            return ["question_id" => $questionItem["question_id"], "value" => $value ];
         };
         return  array_map($cb, $bigScreenQuestions);
     }
@@ -87,7 +81,7 @@ class AnswersBigScreenSeeder extends Seeder
                 $propositions = $v["propositions"];
             }
 
-            return ["question_id" =>  $question->id,"body" => $body,  "type" => $v["type"],"propositions" => $propositions];
+            return ["question_id" =>  $question->id, "body" => $body, "type" => $v["type"], "propositions" => $propositions];
         };
 
         return  array_map($cb, $questions);
@@ -106,12 +100,9 @@ class AnswersBigScreenSeeder extends Seeder
             case 'A':
                 return $this->faker->randomElement($propositions);
             case 'B':
-                return $this->faker->realText()
-                ;
+                return $this->faker->realText();
             case 'C':
                 return $this->faker->numberBetween(1, 5);
-
-
         }
 
     }
