@@ -55,4 +55,9 @@ class Survey extends Model
         return  $results;
 
     }
+
+    public static function findByToken($token){
+        $survey = Survey::where('token', $token)->get()->first();
+        return $survey;
+    }
 }

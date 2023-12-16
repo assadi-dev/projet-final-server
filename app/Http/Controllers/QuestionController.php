@@ -19,6 +19,13 @@ class QuestionController extends Controller
         return QuestionResource::collection(Question::where('survey_id', $surveyId)->get());
     }
 
+    public function findByTokenSurvey($surveyToken)
+    {
+        $survey = Survey::findByToken($surveyToken);
+        return QuestionResource::collection($survey->questions);
+        //return QuestionResource::collection(Question::where('token', $surveyToken)->get());
+    }
+
     /**
      * Show the form for creating a new resource.
      *
