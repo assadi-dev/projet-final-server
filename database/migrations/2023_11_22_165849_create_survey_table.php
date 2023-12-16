@@ -17,6 +17,7 @@ class CreateSurveyTable extends Migration
             $table->id();
             $table->string("title", 50);
             $table->string("description")->nullable();
+            $table->string("token");
             $table->timestamps();
         });
     }

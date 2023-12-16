@@ -17,7 +17,8 @@ class SurveySeeder extends Seeder
     {
         Survey::create([
             'title' => "Sondage Big Screen",
-            'description' => "Participez à notre sondage client et partagez vos impressions. Vous avez le pouvoir d'influencer le développement de nos futurs contenus VR."
+            'description' => "Participez à notre sondage client et partagez vos impressions. Vous avez le pouvoir d'influencer le développement de nos futurs contenus VR.",
+            'token' => base64_encode("Sondage Big Screen"."1")
         ]);
     }
 }

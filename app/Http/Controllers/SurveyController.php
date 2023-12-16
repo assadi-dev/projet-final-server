@@ -46,9 +46,9 @@ class SurveyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($surveyId)
+    public function show($surveyToken)
     {
-        return new SurveyResource(Survey::find($surveyId));
+        return new SurveyResource(Survey::where('token', $surveyToken)->first());
     }
 
     /**
