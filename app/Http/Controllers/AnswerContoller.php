@@ -66,10 +66,10 @@ class AnswerContoller extends Controller
             // check de l'existence de ce participant
             $participant = Participant::where('survey_id', $survey_id)
                                         ->where('email', $email)->get();
-            if(count($participant)>0){
+            if(count($participant) > 0){
                 return response()->json([
                     "message" => "Vous avez déjà participé à ce sondage"
-                ]);
+                ], 500);
             };
 
             $answersSaved = Participant::save_answers($email, $survey_id, $answers);
