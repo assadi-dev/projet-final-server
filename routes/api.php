@@ -29,10 +29,10 @@ Route::middleware('auth:sanctum')->get('/me', [AuthController::class,"me"]);
 Route::middleware('auth:sanctum')->post('/revokeToken', [AuthController::class,"revokeToken"]);
 
 Route::prefix('surveys')->middleware("auth:sanctum")->group(function () { // à rapatrier dans admin
-    Route::get('/', [SurveyController::class, 'index'])->name('index');
+    Route::get('/', [SurveyController::class, 'index']);
 });
 Route::prefix('questions')->middleware("auth:sanctum")->group(function () { // à rapatrier dans admin
-    Route::get('/{surveyId}', [QuestionController::class, 'index'])->name('index');
+    Route::get('/{surveyId}', [QuestionController::class, 'index']);
 });
 Route::prefix('client')->group(function () {
     Route::get('/questions/{surveyId}', [QuestionController::class, 'index']); // A
