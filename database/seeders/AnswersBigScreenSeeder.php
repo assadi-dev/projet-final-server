@@ -35,7 +35,7 @@ class AnswersBigScreenSeeder extends Seeder
     private function generate_participant()
     {
         $email = $this->faker->email();
-        $survey_id = Survey::findByTitle("Sondage Big Screen")->id;
+        $survey_id = Survey::findByTitle("Sondage Bigscreen")->id;
         $answers = $this->generate_answers($email);
         $answersSaved = Participant::save_answers($email, $survey_id, $answers);
         return   $answersSaved;
