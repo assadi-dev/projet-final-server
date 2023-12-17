@@ -39,7 +39,7 @@ class StoreAnswerForParticipantRequest extends FormRequest
         $errors = $validator->errors();
 
         $response = response()->json([
-            'message' => "Erreur validation",
+            'message' => "Veuillez remplir tous les champs obligatires", //"Erreur validation",
             'details' => $errors->messages(),
         ], 422);
         throw new HttpResponseException($response);
