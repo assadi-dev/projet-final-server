@@ -66,7 +66,7 @@ class AnswerContoller extends Controller
             // check de l'existence de ce participant
             $participant = Participant::where('survey_id', $survey_id)
                                         ->where('email', $email)->get();
-            if(count($participant) > 0){
+            if(count($participant) > 0) {
                 return response()->json([
                     "message" => "Vous avez déjà participé à ce sondage"
                 ], 500);
@@ -126,11 +126,14 @@ class AnswerContoller extends Controller
                 throw new \Exception("Le param question_number doit etre renseigné");
             }
 
-
             $survey_id = 1;
             $question_number =  $request->question_number;
             $question_number = $request->question_number;
             $result = Answer::getCountOfValue($survey_id, $question_number);
+
+            if(!isset($result) || empty($result) || count($result) == 0) {
+                throw new \Exception("Données inexistante pour ce numéro de question");
+            }
 
             return $result;
 
@@ -141,9 +144,10 @@ class AnswerContoller extends Controller
         }
     }
 
-    public function getParticipantAnswersClient($token){
+    public function getParticipantAnswersClient($token)
+    {
         $participant = Participant::findByToken($token);
-        if(!$participant){
+        if(!$participant) {
             return response()->json([
                 'message' => "Nous n'avons pas pu récupérer vos réponses"
             ], 500);
@@ -154,7 +158,8 @@ class AnswerContoller extends Controller
         return AnswerFullResource::collection($answers);
     }
 
-    public function getParticipantAnswersAdmin($token){
+    public function getParticipantAnswersAdmin($token)
+    {
         $participant = Participant::findByToken($token);
         $answers = Answer::where('email', $participant->email)
                             ->where('survey_id', $participant->survey_id)
