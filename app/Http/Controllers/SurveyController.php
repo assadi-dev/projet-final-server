@@ -86,12 +86,12 @@ class SurveyController extends Controller
     }
 
     public function findByTokenParticipant($token){
-        $survey = Participant::findByToken($token)->survey;
-        if(!$survey){
+        $participant = Participant::findByToken($token);
+        if(!$participant){
             return response()->json([
                 'message' => "Nous n'avons pas pu récupérer votre sondage"
             ], 500);
         }
-        return new SurveyResource($survey);
+        return new SurveyResource($participant->survey);
     }
 }
