@@ -126,7 +126,7 @@ class AnswerContoller extends Controller
                 throw new \Exception("Le param question_number doit etre renseigné");
             }
 
-            $survey_id = 2;
+            $survey_id = 1;
             $question_number =  $request->question_number;
             $question_number = $request->question_number;
             $result = Answer::getCountOfValue($survey_id, $question_number);
