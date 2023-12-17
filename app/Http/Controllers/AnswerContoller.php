@@ -143,6 +143,11 @@ class AnswerContoller extends Controller
 
     public function getParticipantAnswersClient($token){
         $participant = Participant::findByToken($token);
+        if(!$participant){
+            return response()->json([
+                'message' => "Nous n'avons pas pu récupérer vos réponses"
+            ], 500);
+        }
         $answers = Answer::where('email', $participant->email)
                             ->where('survey_id', $participant->survey_id)
                             ->get();
