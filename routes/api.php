@@ -28,15 +28,15 @@ Route::post('/register', [AuthController::class,"register"]);
 Route::middleware('auth:sanctum')->get('/me', [AuthController::class,"me"]);
 Route::middleware('auth:sanctum')->post('/revokeToken', [AuthController::class,"revokeToken"]);
 
-Route::prefix('surveys')->middleware("auth:sanctum")->group(function () { // à rapatrier dans admin
+Route::prefix('surveys')->middleware("auth:sanctum")->group(function () {
     Route::get('/', [SurveyController::class, 'index']);
 });
-Route::prefix('questions')->middleware("auth:sanctum")->group(function () { // à rapatrier dans admin
+Route::prefix('questions')->middleware("auth:sanctum")->group(function () {
     Route::get('/{surveyId}', [QuestionController::class, 'index']);
 });
 Route::prefix('client')->group(function () {
-    Route::get('/questions/{surveyId}', [QuestionController::class, 'index']); // A
-    Route::get('/questions/survey/{surveyToken}', [QuestionController::class, 'findByTokenSurvey']); // AA
+    Route::get('/questions/{surveyId}', [QuestionController::class, 'index']);
+    Route::get('/questions/survey/{surveyToken}', [QuestionController::class, 'findByTokenSurvey']);
     Route::get('/surveys/{surveyToken}', [SurveyController::class, 'show']);
     Route::get('/surveys/survey/{token}', [SurveyController::class, 'findByTokenParticipant']);
     Route::post('/answers', [AnswerContoller::class, 'storeForParticipant']);
@@ -49,9 +49,6 @@ Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
 Route::prefix('answers')->group(function () {
     Route::middleware('auth:sanctum')->get('/', [AnswerContoller::class, 'index']);
     Route::middleware('auth:sanctum')->get('/count/value/{survey_id}', [AnswerContoller::class, 'getCountValue']);
-    //Route::post('/', [AnswerContoller::class, 'store']);
-    Route::post('/', [AnswerContoller::class, 'storeForParticipant']); // à surement enlever
-    //Route::middleware('auth:sanctum')->get('/{answerId}', [AnswerContoller::class, 'index']);
 });
 Route::prefix('participants')->group(function () {
     Route::middleware('auth:sanctum')->get('/', [ParticipantController::class, 'index']);
