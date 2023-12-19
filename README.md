@@ -17,6 +17,10 @@
 
 # installation du serveur Local
 
+### Requis
+- PHP 7.4 ou superieur
+- MySql 5.7
+
 Créer votre base de donnée avec le nom db-bigscreen
 
 Créer un fichier **.env** en reprenenant le fichier **.env.example** et suprrimer le **.example**. 
